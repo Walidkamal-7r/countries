@@ -1,7 +1,8 @@
-import 'package:countries/core/utils/app_styles.dart';
+import 'package:countries/core/theme/theme_cubit.dart';
 import 'package:countries/features/countries/views/home_screen/widgets/continent_filter.dart';
 import 'package:countries/features/countries/views/home_screen/widgets/countries_card.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -17,7 +18,18 @@ class HomeScreen extends StatelessWidget {
           onPressed: () {},
           icon: Icon(Icons.language_outlined),
         ),
-        actions: [IconButton(onPressed: () {}, icon: Icon(Icons.sunny))],
+        actions: [
+          IconButton(onPressed: () {
+            context.read<ThemeCubit>().toggleTheme();
+          }, icon: Icon(
+            Theme
+                .of(context)
+                .brightness == Brightness.dark
+                ? Icons.nightlight_round
+                : Icons.sunny,
+          ),
+          )
+        ],
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: [
